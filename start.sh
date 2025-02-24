@@ -1,0 +1,27 @@
+#!/bin/sh
+# 容器主体，分别调用各个域名的更新
+echo "start execute script start.sh"
+while true; do
+    # 使用 find 命令查找匹配的脚本文件
+    found_scripts=false
+    find /domains -type f -name "start.sh" | while read -r script; do
+        found_scripts=true
+        if [ -f "$script" ]; then
+            # 检查脚本是否有可执行权限，如果没有则添加
+            if [ ! -x "$script" ]; then
+                chmod +x "$script"
+            fi
+            echo "Running script: $script"
+            "$script"
+        fi
+    done
+
+    # 检查是否有匹配的脚本
+    if [ "$found_scripts" = false ]; then
+        echo "No matching start.sh scripts found. Skipping."
+    fi
+
+    echo "startsleep"
+    # 休眠一天
+    sleep 86400
+done
