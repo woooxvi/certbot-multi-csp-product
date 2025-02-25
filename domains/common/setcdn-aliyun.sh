@@ -17,7 +17,10 @@ rm "$CERT_ID_FILE"
 # 更新 CDN 配置，使用新的证书
 # UPDATE_RESULT=$(tccli cdn ModifyDomainConfig --Domain "$CDN_DOMAIN" --Route 'Https.CertInfo.CertId' --Value "{\"update\":\"$CERT_ID\"}" 2>&1)
 
-rm CMD.sh
+if test -e "CMD.sh"; then
+    rm "CMD.sh"
+    echo "上一次执行的 CMD.sh 已删除"
+fi
 
 echo -n "aliyun dcdn SetDcdnDomainSSLCertificate --region cn-hangzhou --DomainName='" >> "CMD.sh"
 echo -n $CDN_DOMAIN >> "CMD.sh"
@@ -27,7 +30,6 @@ echo "'" >> "CMD.sh"
 
 chmod +x CMD.sh
 
-cat CMD.sh
 UPDATE_RESULT=$(./CMD.sh)
 
 

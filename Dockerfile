@@ -5,7 +5,7 @@ RUN pip install certbot-dns-tencentcloud certbot-dns-aliyun
 RUN pip install --upgrade pip
 RUN pip install tccli
 
-# 阿里云cli
+# # 阿里云cli
 COPY aliyun /usr/local/bin/aliyun
 RUN chmod +x /usr/local/bin/aliyun
 

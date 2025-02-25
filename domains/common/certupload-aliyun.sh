@@ -35,20 +35,22 @@ KEY_CONTENT=$(cat "$KEY_FILE")
 TODAY=$(date +"%Y_%m_%d")
 CERT_NAME="${domain}_${TODAY}"
 
-rm UPLOAD_CMD.sh
+if test -e "CMD.sh"; then
+    rm "CMD.sh"
+    echo "上一次执行的 CMD.sh 已删除"
+fi
 
-echo -n "aliyun cas UploadUserCertificate --region cn-hangzhou --Cert='" >> "UPLOAD_CMD.sh"
-echo -n $(cat "$CERT_FILE") >> "UPLOAD_CMD.sh"
-echo -n "' --Key='" >> "UPLOAD_CMD.sh"
-echo -n $(cat "$KEY_FILE") >> "UPLOAD_CMD.sh"
-echo -n "' --Name '" >> "UPLOAD_CMD.sh"
-echo -n $CERT_NAME >> "UPLOAD_CMD.sh"
-echo "'" >> "UPLOAD_CMD.sh"
+echo -n "aliyun cas UploadUserCertificate --region cn-hangzhou --Cert='" >> "CMD.sh"
+echo -n $(cat "$CERT_FILE") >> "CMD.sh"
+echo -n "' --Key='" >> "CMD.sh"
+echo -n $(cat "$KEY_FILE") >> "CMD.sh"
+echo -n "' --Name '" >> "CMD.sh"
+echo -n $CERT_NAME >> "CMD.sh"
+echo "'" >> "CMD.sh"
 
-chmod +x UPLOAD_CMD.sh
+chmod +x CMD.sh
 
-cat UPLOAD_CMD.sh
-UPLOAD_RESULT=$(./UPLOAD_CMD.sh)
+UPLOAD_RESULT=$(./CMD.sh)
 
 # UPLOAD_RESULT=$(aliyun cas UploadUserCertificate --Cert "$(cat "$CERT_FILE")" --Key "$(cat "$KEY_FILE")" --Name "$domain" 2>&1)
 

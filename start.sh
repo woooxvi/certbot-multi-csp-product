@@ -11,8 +11,9 @@ while true; do
             if [ ! -x "$script" ]; then
                 chmod +x "$script"
             fi
-            echo "Running script: $script"
+            echo "START Running script: $script vvvvvvvvvvvvvvvvv"
             "$script"
+            echo "END Running script: $script ^^^^^^^^^^^^^^^^^"
         fi
     done
 

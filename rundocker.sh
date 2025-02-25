@@ -1,3 +1,10 @@
+if [ ! -e aliyun ]; then
+    echo "得先去阿里云下载cli文件到本目录，命名为aliyun"
+    echo "阿里云cli下载地址： https://help.aliyun.com/zh/cli/install-cli-on-linux"
+    exit 0
+fi
+
+
 docker build --build-arg http_proxy=http://192.168.0.182:808 --build-arg https_proxy=http://192.168.0.182:808 -t certbot-domains .
 
 # 检查 certbot-domains-everyday 容器是否存在

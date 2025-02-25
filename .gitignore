@@ -1,0 +1,6 @@
+domains/
+!domains/demo.xiaoqiumi.com
+.Dockerfile.swp
+logs/
+letsencrypt*/
+aliyun
