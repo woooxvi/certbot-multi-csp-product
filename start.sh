@@ -1,4 +1,12 @@
 #!/bin/sh
+
+# 检查 /domains 是否为挂载点
+if ! mountpoint -q /domains; then
+    # 复制 /domains_temp 内容到 /domains，跳过已存在的同名文件
+    cp -rn /domains_temp/. /domains
+fi
+
+
 # 容器主体，分别调用各个域名的更新
 echo "start execute script start.sh"
 while true; do

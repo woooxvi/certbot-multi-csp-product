@@ -1,5 +1,6 @@
 domains/
 !domains/demo.xiaoqiumi.com
+!domains/common
 .Dockerfile.swp
 logs/
 letsencrypt*/
