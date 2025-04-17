@@ -26,8 +26,6 @@ fi
 
 
 CERT_ID=$(cat "$CERT_ID_FILE")
-# 删除临时文件
-# rm "$CERT_ID_FILE"
 
 # 更新 CDN 配置，使用新的证书
 UPDATE_RESULT=$(tccli clb ModifyDomainAttributes --cli-unfold-argument --LoadBalancerId "$lb_id" --ListenerId "$listen_id" --Domain "$domain" --Certificate.CertId "$CERT_ID" --Certificate.SSLMode 'UNIDIRECTIONAL' 2>&1)

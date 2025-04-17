@@ -11,8 +11,6 @@ if [ ! -f "$CERT_ID_FILE" ]; then
 fi
 
 CERT_ID=$(cat "$CERT_ID_FILE")
-# 删除临时文件
-rm "$CERT_ID_FILE"
 
 # 更新 云直播 配置，使用新的证书
 UPDATE_RESULT=$(tccli live ModifyLiveDomainCertBindings --cli-unfold-argument --DomainInfos.0.DomainName "$CDN_DOMAIN" --DomainInfos.0.Status 1 --CloudCertId "$CERT_ID" 2>&1)

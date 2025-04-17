@@ -25,7 +25,22 @@ if [ $time_difference -gt 72000 ]; then
     exit 0
 fi
 
-echo "证书是最近一小时生成的，cledar开始上传到阿里云..."
+
+# 检查本地是否存在 .last_uploaded_cert_id 文件
+if [ -f "${cert_output_dir}/.last_uploaded_cert_id" ]; then
+    LAST_UPLOADED_CERT_ID=$(cat "${cert_output_dir}/.last_uploaded_cert_id")
+    # 查询该证书 ID 在阿里云上是否存在
+    CERT_INFO=$(aliyun cdn DescribeCertificateInfoByID --CertId "$LAST_UPLOADED_CERT_ID" 2>&1)
+    if echo "$CERT_INFO" | grep -q "CertId"; then
+        echo "阿里云上已存在该证书，证书 ID 为: $LAST_UPLOADED_CERT_ID，无需上传。"
+        exit 0
+    else
+        echo "阿里云上不存在该证书 $LAST_UPLOADED_CERT_ID ，$CERT_INFO 开始上传到阿里云..."
+    fi
+else
+    echo "本地没有证书记录，不能判断阿里云有无证书..."
+fi
+
 
 # 读取证书文件内容
 CERT_CONTENT=$(cat "$CERT_FILE")

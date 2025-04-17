@@ -18,4 +18,4 @@ sh /domains/common/logaliyuncli.sh "$domain_dir" "all"
 sh /domains/common/certupload-aliyun.sh "$domain" "$cert_output_dir"
 
 # 设置证书到 CDN
-sh /domains/common/setcdn-aliyun.sh "$domain" "$cert_output_dir"
+sh /domains/common/setdcdn-aliyun.sh "$domain" "$cert_output_dir"

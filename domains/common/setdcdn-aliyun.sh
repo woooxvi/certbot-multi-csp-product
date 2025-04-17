@@ -20,8 +20,7 @@ if test -e "CMD.sh"; then
     echo "上一次执行的 CMD.sh 已删除"
 fi
 
-# 生成阿里云 CDN 设置证书的命令并写入 CMD.sh
-echo -n "aliyun cdn SetCdnDomainSSLCertificate --DomainName='" >> "CMD.sh"
+echo -n "aliyun dcdn SetDcdnDomainSSLCertificate --region cn-hangzhou --DomainName='" >> "CMD.sh"
 echo -n $CDN_DOMAIN >> "CMD.sh"
 echo -n "' --SSLProtocol on --CertId '" >> "CMD.sh"
 echo -n $CERT_ID >> "CMD.sh"
