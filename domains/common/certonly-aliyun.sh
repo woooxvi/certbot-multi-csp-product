@@ -3,6 +3,8 @@
 # 获取阿里云域名的证书
 domain="$1"
 cert_output_dir="$2"
+wildcard="$3"
+
 domain_dir="/domains/${domain}"
 account_ini="${domain_dir}/account.ini"
 
@@ -31,6 +33,15 @@ else
 fi
 
 # 执行 Certbot 命令生成证书
+domain=$wildcard$domain
+
+echo "wildcard:$wildcard"
+echo "domain:$domain"
+echo "cert_file:$cert_file"
+echo "key_file:$key_file"
+echo "account_ini:$account_ini"
+
+
 certbot certonly \
   --authenticator=dns-aliyun \
   --dns-aliyun-credentials "$account_ini" \

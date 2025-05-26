@@ -11,8 +11,6 @@ if [ ! -f "$CERT_ID_FILE" ]; then
 fi
 
 CERT_ID=$(cat "$CERT_ID_FILE")
-# 删除临时文件
-rm "$CERT_ID_FILE"
 
 # 更新 CDN 配置，使用新的证书
 UPDATE_RESULT=$(tccli cdn ModifyDomainConfig --Domain "$CDN_DOMAIN" --Route 'Https.CertInfo.CertId' --Value "{\"update\":\"$CERT_ID\"}" 2>&1)
