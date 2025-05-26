@@ -37,7 +37,7 @@ UPDATE_RESULT=$(./CMD.sh)
 
 # 检查更新是否成功
 if echo "$UPDATE_RESULT" | grep -q "RequestId"; then
-    echo "CDN 配置更新成功，已使用新证书。"
+    echo "CDN 配置更新成功，已使用新证书。 $domain $CDN_DOMAIN"
 else
     echo "CDN 配置更新失败: $UPDATE_RESULT"
     exit 1

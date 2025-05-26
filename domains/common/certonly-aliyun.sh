@@ -48,6 +48,7 @@ certbot certonly \
   --agree-tos \
   --register-unsafely-without-email \
   --renew-by-default \
+  --key-type rsa \
   -d "$domain" \
   --config-dir "$cert_output_dir" \
   --work-dir "$cert_output_dir" \
